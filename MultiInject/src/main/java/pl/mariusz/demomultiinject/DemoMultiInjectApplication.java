@@ -1,6 +1,7 @@
 package pl.mariusz.demomultiinject;
 
 import lombok.*;
+import org.mapstruct.Mapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,13 +41,8 @@ public class DemoMultiInjectApplication implements CommandLineRunner {
 class MappingService {
     private final List<SubjectMapper> mappers;
 
-    interface SubjectMapper {
-        boolean canHandle(SubjectDto dto);
 
-        Subject handle(SubjectDto dto);
-    }
-
-    public Subject map (SubjectDto subjectDto){
+    public Subject map(SubjectDto subjectDto) {
         Subject subject = null;
         for (SubjectMapper mapper : mappers) {
             if (mapper.canHandle(subjectDto)) {
@@ -59,6 +55,11 @@ class MappingService {
 
 }
 
+interface SubjectMapper {
+    boolean canHandle(SubjectDto dto);
+
+    Subject handle(SubjectDto dto);
+}
 
 interface Subject {
 }
@@ -92,7 +93,8 @@ class CompanySubject implements Subject {
 }
 
 @Component
-class PersonMapper implements MappingService.SubjectMapper {
+@Mapper(componentModel = "spring")
+abstract class PersonMapper implements SubjectMapper {
 
     @Override
     public boolean canHandle(SubjectDto dto) {
@@ -100,13 +102,12 @@ class PersonMapper implements MappingService.SubjectMapper {
     }
 
     @Override
-    public Subject handle(SubjectDto dto) {
-        return new PersonSubject(dto.getName(), dto.getSurname(), dto.getAddress());
-    }
+    public abstract PersonSubject handle(SubjectDto dto);
 }
 
 @Component
-class CompanyMapper implements MappingService.SubjectMapper {
+@Mapper(componentModel = "spring")
+abstract class CompanyMapper implements SubjectMapper {
 
     @Override
     public boolean canHandle(SubjectDto dto) {
@@ -114,7 +115,5 @@ class CompanyMapper implements MappingService.SubjectMapper {
     }
 
     @Override
-    public Subject handle(SubjectDto dto) {
-        return new CompanySubject(dto.getCompanyName(), dto.getAddress());
-    }
+    public abstract CompanySubject handle(SubjectDto dto);
 }
