@@ -3,6 +3,11 @@ package pl.mariusz.demomultiinject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.mariusz.demomultiinject.dto.SubjectDto;
+import pl.mariusz.demomultiinject.entity.CompanySubject;
+import pl.mariusz.demomultiinject.entity.PersonSubject;
+import pl.mariusz.demomultiinject.entity.Subject;
+import pl.mariusz.demomultiinject.mapper.MappingService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
