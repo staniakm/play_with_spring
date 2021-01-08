@@ -9,5 +9,5 @@ public class SubjectDto {
     private String name;
     private String surname;
     private String companyName;
-    private String address;
+    private AddressDto address;
 }

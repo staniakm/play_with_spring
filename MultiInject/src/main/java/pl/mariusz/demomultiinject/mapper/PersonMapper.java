@@ -6,7 +6,7 @@ import pl.mariusz.demomultiinject.dto.SubjectDto;
 import pl.mariusz.demomultiinject.entity.PersonSubject;
 
 @Component
-@Mapper(componentModel = "spring")
+@Mapper(uses ={AddressMapper.class} ,componentModel = "spring")
 abstract class PersonMapper implements SubjectMapper {
 
     @Override

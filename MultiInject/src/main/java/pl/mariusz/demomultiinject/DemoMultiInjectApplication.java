@@ -21,17 +21,6 @@ public class DemoMultiInjectApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        SubjectDto subjectDto = new SubjectDto();
-        subjectDto.setAddress("Address");
-        subjectDto.setName("Jan");
-        subjectDto.setSurname("kowalski");
-
-        Subject s = service.map(subjectDto);
-
-        System.out.println(s);
-
-
-
     }
 
 }

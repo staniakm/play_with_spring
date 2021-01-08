@@ -12,5 +12,5 @@ import lombok.ToString;
 public class PersonSubject implements Subject {
     private String name;
     private String surname;
-    private String address;
+    private Address address;
 }

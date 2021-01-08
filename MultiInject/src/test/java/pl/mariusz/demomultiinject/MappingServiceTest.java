@@ -3,7 +3,9 @@ package pl.mariusz.demomultiinject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.mariusz.demomultiinject.dto.AddressDto;
 import pl.mariusz.demomultiinject.dto.SubjectDto;
+import pl.mariusz.demomultiinject.entity.Address;
 import pl.mariusz.demomultiinject.entity.CompanySubject;
 import pl.mariusz.demomultiinject.entity.PersonSubject;
 import pl.mariusz.demomultiinject.entity.Subject;
@@ -20,10 +22,12 @@ public class MappingServiceTest {
     @Test
     void shouldMapToPersonSubject() {
         //given
+        Address address = new Address("Street", "City");
         SubjectDto dto = new SubjectDto();
         dto.setName("Jan");
         dto.setSurname("Kowalski");
-        dto.setAddress("Address");
+        AddressDto addressDto = new AddressDto("Street", "City");
+        dto.setAddress(addressDto);
 
         //when
         Subject map = service.map(dto);
@@ -31,7 +35,7 @@ public class MappingServiceTest {
         //then
         assertThat(map).isInstanceOf(PersonSubject.class);
         PersonSubject personSubject = (PersonSubject) map;
-        assertThat(personSubject.getAddress()).isEqualTo("Address");
+        assertThat(personSubject.getAddress()).usingRecursiveComparison().isEqualTo(address);
         assertThat(personSubject.getName()).isEqualTo("Jan");
         assertThat(personSubject.getSurname()).isEqualTo("Kowalski");
     }
@@ -39,9 +43,11 @@ public class MappingServiceTest {
     @Test
     void shouldMapToCompanySubject() {
         //given
+        Address address = new Address("Street", "City");
+        AddressDto addressDto = new AddressDto("Street", "City");
         SubjectDto dto = new SubjectDto();
         dto.setCompanyName("Company");
-        dto.setAddress("Address");
+        dto.setAddress(addressDto);
 
         //when
         Subject map = service.map(dto);
@@ -49,7 +55,7 @@ public class MappingServiceTest {
         //then
         assertThat(map).isInstanceOf(CompanySubject.class);
         CompanySubject companySubject = (CompanySubject) map;
-        assertThat(companySubject.getAddress()).isEqualTo("Address");
+        assertThat(companySubject.getCompanyAddress()).usingRecursiveComparison().isEqualTo(address);
         assertThat(companySubject.getCompanyName()).isEqualTo("Company");
     }
 }
