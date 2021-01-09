@@ -9,18 +9,10 @@ import pl.mariusz.demomultiinject.entity.Subject;
 import pl.mariusz.demomultiinject.mapper.MappingService;
 
 @SpringBootApplication
-@RequiredArgsConstructor
-public class DemoMultiInjectApplication implements CommandLineRunner {
-
-    private final MappingService service;
+public class DemoMultiInjectApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(DemoMultiInjectApplication.class, args);
-    }
-
-    @Override
-    public void run(String... args) {
-
     }
 
 }

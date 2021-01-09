@@ -3,10 +3,7 @@ package pl.mariusz.demomultiinject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.mariusz.demomultiinject.entity.Address;
-import pl.mariusz.demomultiinject.entity.CompanySubject;
-import pl.mariusz.demomultiinject.entity.PersonSubject;
-import pl.mariusz.demomultiinject.entity.Subject;
+import pl.mariusz.demomultiinject.entity.*;
 import pl.mariusz.demomultiinject.validators.AddressValidator;
 import pl.mariusz.demomultiinject.validators.CompanySubjectValidator;
 import pl.mariusz.demomultiinject.validators.PersonSubjectValidator;
@@ -127,6 +124,20 @@ public class ValidationServiceTest {
 
         //then
         assertThat(exception.getMessage()).isEqualTo("Subject of invalid type");
+    }
+
+    @Test
+    void shouldThrowExceptionOnInvalidEntity() {
+        //given
+        Subject subject = new CustomSubject("example");
+
+        //when
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> service.isValid(subject));
+
+        //then
+        assertThat(exception.getMessage()).isEqualTo("Subject invalid type");
+
     }
 
     private Address getAddress() {

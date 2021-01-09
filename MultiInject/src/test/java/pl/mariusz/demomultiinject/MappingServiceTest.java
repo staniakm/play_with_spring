@@ -12,6 +12,7 @@ import pl.mariusz.demomultiinject.entity.Subject;
 import pl.mariusz.demomultiinject.mapper.MappingService;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class MappingServiceTest {
@@ -57,5 +58,17 @@ public class MappingServiceTest {
         CompanySubject companySubject = (CompanySubject) map;
         assertThat(companySubject.getCompanyAddress()).usingRecursiveComparison().isEqualTo(address);
         assertThat(companySubject.getCompanyName()).isEqualTo("Company");
+    }
+
+    @Test
+    void shouldThrowExceptionOnUnknownEntity() {
+        //given
+        SubjectDto subjectDto = new SubjectDto();
+        subjectDto.setName("Jan");
+
+        //when
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> service.map(subjectDto));
+
+        assertThat(exception.getMessage()).isEqualTo("Subject is invalid type");
     }
 }

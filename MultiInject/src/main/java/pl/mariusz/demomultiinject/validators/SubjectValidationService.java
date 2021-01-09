@@ -21,7 +21,7 @@ public class SubjectValidationService {
                 return validator.validate(subject);
             }
         }
-        throw new IllegalArgumentException("Subject is invalid type");
+        throw new IllegalArgumentException("Subject invalid type");
     }
 
 

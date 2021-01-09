@@ -14,14 +14,12 @@ public class MappingService {
 
 
     public Subject map(SubjectDto subjectDto) {
-        Subject subject = null;
         for (SubjectMapper mapper : mappers) {
             if (mapper.canHandle(subjectDto)) {
-                subject = mapper.handle(subjectDto);
-                break;
+                return mapper.handle(subjectDto);
             }
         }
-        return subject;
+        throw new IllegalArgumentException("Subject is invalid type");
     }
 
 }
