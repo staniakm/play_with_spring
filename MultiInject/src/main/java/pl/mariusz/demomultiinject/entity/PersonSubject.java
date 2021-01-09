@@ -1,13 +1,9 @@
 package pl.mariusz.demomultiinject.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
-@Setter
-@AllArgsConstructor
+@Value
 @ToString
 public class PersonSubject implements Subject {
     private String name;
