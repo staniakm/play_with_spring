@@ -14,12 +14,11 @@ public class MappingService {
 
 
     public Subject map(SubjectDto subjectDto) {
-        for (SubjectMapper mapper : mappers) {
-            if (mapper.canHandle(subjectDto)) {
-                return mapper.handle(subjectDto);
-            }
-        }
-        throw new IllegalArgumentException("Subject is invalid type");
+        return mappers.stream()
+                .filter(it -> it.canHandle(subjectDto))
+                .map(it -> it.handle(subjectDto))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Subject invalid type"));
     }
 
 }

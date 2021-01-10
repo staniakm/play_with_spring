@@ -69,6 +69,6 @@ public class MappingServiceTest {
         //when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> service.map(subjectDto));
 
-        assertThat(exception.getMessage()).isEqualTo("Subject is invalid type");
+        assertThat(exception.getMessage()).isEqualTo("Subject invalid type");
     }
 }

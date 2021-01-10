@@ -16,12 +16,11 @@ public class SubjectValidationService {
 
     public boolean isValid(Subject subject) {
         log.info("Start validate " + subject);
-        for (SubjectValidator validator : validators) {
-            if (validator.canHandle(subject)) {
-                return validator.validate(subject);
-            }
-        }
-        throw new IllegalArgumentException("Subject invalid type");
+        return validators.stream()
+                .filter(it -> it.canHandle(subject))
+                .map(it -> it.validate(subject))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Subject invalid type"));
     }
 
 
