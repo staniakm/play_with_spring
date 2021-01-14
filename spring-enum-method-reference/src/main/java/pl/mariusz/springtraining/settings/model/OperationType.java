@@ -1,6 +1,7 @@
-package pl.mariusz.springtraining.settings;
+package pl.mariusz.springtraining.settings.model;
 
 import lombok.Getter;
+import pl.mariusz.springtraining.settings.strategy.PatchStrategy;
 
 import java.util.function.BiFunction;
 

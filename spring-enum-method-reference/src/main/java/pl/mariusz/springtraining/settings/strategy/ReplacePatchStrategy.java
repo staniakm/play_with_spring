@@ -1,9 +1,12 @@
-package pl.mariusz.springtraining.settings;
+package pl.mariusz.springtraining.settings.strategy;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import pl.mariusz.springtraining.settings.repository.SettingsRepository;
+import pl.mariusz.springtraining.settings.model.SettingsEntity;
+import pl.mariusz.springtraining.settings.model.SettingsEntityDto;
 
 @Component
 @Slf4j
@@ -16,7 +19,7 @@ public class ReplacePatchStrategy {
         if ("email".equalsIgnoreCase(dto.getName()) && StringUtils.isEmpty(dto.getValue()))
             throw new IllegalArgumentException("Email must not be empty");
 
-        SettingsEntity settingsEntity = new SettingsEntity(dto.getOperationType() + " " + dto.getName().toUpperCase() + " " + dto.getValue());
+        SettingsEntity settingsEntity = new SettingsEntity(dto.getName().toUpperCase(), dto.getValue());
         return repository.save(settingsEntity);
     }
 }

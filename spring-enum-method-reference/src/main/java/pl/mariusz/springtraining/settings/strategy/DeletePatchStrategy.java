@@ -1,8 +1,11 @@
-package pl.mariusz.springtraining.settings;
+package pl.mariusz.springtraining.settings.strategy;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pl.mariusz.springtraining.settings.repository.SettingsRepository;
+import pl.mariusz.springtraining.settings.model.SettingsEntity;
+import pl.mariusz.springtraining.settings.model.SettingsEntityDto;
 
 @Component
 @Slf4j
@@ -14,6 +17,6 @@ public class DeletePatchStrategy {
         log.info("{}.  {}", this.getClass().getName(), dto);
         if ("email".equalsIgnoreCase(dto.getName()))
             throw new IllegalArgumentException("Email must not be deleted");
-        return repository.delete(new SettingsEntity(dto.getOperationType() + " " + dto.getName().toUpperCase()));
+        return repository.delete(new SettingsEntity(dto.getName(), ""));
     }
 }

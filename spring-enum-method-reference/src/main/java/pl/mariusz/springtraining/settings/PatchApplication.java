@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pl.mariusz.springtraining.settings.model.OperationType;
+import pl.mariusz.springtraining.settings.model.SettingsEntityDto;
+import pl.mariusz.springtraining.settings.strategy.PatchStrategy;
 
 @SpringBootApplication
 public class PatchApplication implements CommandLineRunner {

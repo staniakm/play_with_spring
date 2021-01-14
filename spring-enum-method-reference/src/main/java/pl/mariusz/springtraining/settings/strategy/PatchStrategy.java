@@ -1,7 +1,9 @@
-package pl.mariusz.springtraining.settings;
+package pl.mariusz.springtraining.settings.strategy;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import pl.mariusz.springtraining.settings.model.SettingsEntity;
+import pl.mariusz.springtraining.settings.model.SettingsEntityDto;
 
 @Component
 @RequiredArgsConstructor

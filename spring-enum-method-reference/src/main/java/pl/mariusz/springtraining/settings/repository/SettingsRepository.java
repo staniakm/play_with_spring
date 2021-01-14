@@ -1,7 +1,8 @@
-package pl.mariusz.springtraining.settings;
+package pl.mariusz.springtraining.settings.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import pl.mariusz.springtraining.settings.model.SettingsEntity;
 
 @Component
 @Slf4j
