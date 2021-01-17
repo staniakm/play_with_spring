@@ -1,21 +1,28 @@
 package pl.mariusz.springstrategy;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import pl.mariusz.springstrategy.domain.Subject;
 import pl.mariusz.springstrategy.dto.PatchParametersDto;
 import pl.mariusz.springstrategy.patch.PatchService;
+import pl.mariusz.springstrategy.patch.strategy.PatchAddStrategy;
+import pl.mariusz.springstrategy.patch.strategy.PatchRemoveStrategy;
+import pl.mariusz.springstrategy.patch.strategy.PatchReplaceStrategy;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static pl.mariusz.springstrategy.domain.OpertationType.*;
 
-@SpringBootTest
 public class PatchServiceTest {
 
-    @Autowired
     private PatchService patchService;
+
+    @BeforeEach
+    void setUp() {
+        patchService = new PatchService(List.of(new PatchAddStrategy(), new PatchReplaceStrategy(), new PatchRemoveStrategy()));
+    }
 
     @Test
     void shouldPatchSubjectAddEmail() {
