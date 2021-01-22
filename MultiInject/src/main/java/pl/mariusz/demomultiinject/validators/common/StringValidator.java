@@ -1,6 +1,6 @@
 package pl.mariusz.demomultiinject.validators.common;
 
-import static java.lang.String.format;
+import java.util.function.Supplier;
 
 public class StringValidator {
 
@@ -11,14 +11,14 @@ public class StringValidator {
         return new StringValidator();
     }
 
-    public StringValidator maxLengthValidator(String fieldName, String value, int maxLength) {
+    public StringValidator maxLengthValidator(String value, int maxLength, Supplier<RuntimeException> exceptionSupplier) {
         if (value != null && value.length() > maxLength)
-            throw new IllegalArgumentException(format("Field %s - is too long", fieldName));
+            throw exceptionSupplier.get();
         return this;
     }
 
-    public StringValidator requiredField(String fieldName, String value) {
-        if (value == null) throw new IllegalArgumentException(format("Field %s - is required", fieldName));
+    public StringValidator requiredField(String value, Supplier<RuntimeException> exceptionSupplier) {
+        if (value == null) throw exceptionSupplier.get();
         return this;
     }
 }
